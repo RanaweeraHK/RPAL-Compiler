@@ -92,6 +92,26 @@ public:
         static const string punctuation = "();,";
         return token.size() == 1 && punctuation.find(token) != string::npos;
     }
+
+    // Function to convert TokenType enum to string
+    string tokenTypeName(TokenType type) {
+        switch (type) {
+            case IDENTIFIER:
+                return "IDENTIFIER";
+            case INTEGER:
+                return "INTEGER";
+            case OPERATOR:
+                return "OPERATOR";
+            case STRING:
+                return "STRING";
+            case DELETE:
+                return "DELETE";
+            case PUNCTION:
+                return "PUNCTION";
+            default:
+                return "UNKNOWN";
+        }
+    }
 };
 
 // Tokenize function
@@ -160,10 +180,23 @@ int main() {
     LexicalAnalyzer lexer;
     vector<Token> tokens = tokenize(input, lexer);
 
+    ofstream outputFile("lexical_tokens.txt");
+    if (!outputFile) {
+        cerr << "Error: Unable to create output file." << endl;
+        return 1;
+    }
+
+    // Redirecting output to the file
+    streambuf* coutbuf = cout.rdbuf(); // Save cout's buffer
+    cout.rdbuf(outputFile.rdbuf()); // Redirect cout to outputFile
+
     // Output tokens
     for (const auto& token : tokens) {
-        cout << "<" << token.value << "> : " << static_cast<int>(token.type) << endl;
+        cout <<lexer.tokenTypeName(token.type)<< " " << token.value << "\n";
     }
+
+    // Restore cout's original buffer
+    cout.rdbuf(coutbuf);
 
     return 0;
 }
