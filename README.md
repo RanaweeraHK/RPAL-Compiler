@@ -39,15 +39,17 @@ To build and run the RPAL compiler, follow these steps:
 
 1. **Clone the repository**:
    ```sh
-   #### git clone https://github.com/RanaweeraHK/Compiler.git
-   #### cd Compiler
+   git clone https://github.com/RanaweeraHK/Compiler.git
+   cd Compiler
    ```
 
 2. **Build the project**:
    Ensure you have a C++ compiler installed (like g++ or clang). Then, run:
-   #### make
+   ```sh
+   make
+     ```
 
-3. **Run the compiler**:
+4. **Run the compiler**:
    Provide an RPAL source file to the compiler
 
    ## References
